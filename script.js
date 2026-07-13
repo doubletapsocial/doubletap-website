@@ -20,6 +20,35 @@
   }, { passive: true });
 })();
 
+// ---- Scroll-spy: highlight nav link for section in view ----
+(function () {
+  var navLinks = document.querySelectorAll('.nav a:not(.nav__cta)');
+  if (!navLinks.length) return;
+
+  var sections = [];
+  navLinks.forEach(function (link) {
+    var id = link.getAttribute('href');
+    if (id && id.charAt(0) === '#') {
+      var section = document.querySelector(id);
+      if (section) sections.push({ link: link, section: section });
+    }
+  });
+  if (!sections.length) return;
+
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      var match = sections.find(function (s) { return s.section === entry.target; });
+      if (!match) return;
+      if (entry.isIntersecting) {
+        navLinks.forEach(function (l) { l.classList.remove('is-active'); });
+        match.link.classList.add('is-active');
+      }
+    });
+  }, { rootMargin: '-40% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(function (s) { io.observe(s.section); });
+})();
+
 // ---- Sticky header shadow on scroll ----
 (function () {
   var header = document.querySelector('.site-header');
@@ -129,7 +158,41 @@
       try { localStorage.setItem(STORAGE_KEY, '1'); } catch (e) {}
       setTimeout(function () { closeModal(false); }, 2200);
     }).catch(function () {
-      note.textContent = 'Something went wrong — please try again or email us directly.';
+      note.textContent = 'Something went wrong. Please try again or email us directly.';
+      note.hidden = false;
+    });
+  });
+})();
+
+// ---- Main CTA contact form ----
+(function () {
+  var form = document.getElementById('mainContactForm');
+  var note = document.getElementById('mainContactNote');
+  if (!form || !note) return;
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var button = form.querySelector('button[type="submit"]');
+    var originalText = button.innerHTML;
+    button.disabled = true;
+    button.textContent = 'Sending...';
+
+    var data = new FormData(form);
+    fetch(form.action, {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(function (res) {
+      if (!res.ok) throw new Error('Request failed');
+      form.reset();
+      form.querySelectorAll('label').forEach(function (el) { el.hidden = true; });
+      button.hidden = true;
+      note.textContent = "Sent, thanks! We'll be in touch within one business day.";
+      note.hidden = false;
+    }).catch(function () {
+      button.disabled = false;
+      button.innerHTML = originalText;
+      note.textContent = 'Something went wrong. Please try again or email us directly.';
       note.hidden = false;
     });
   });

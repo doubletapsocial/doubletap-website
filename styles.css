@@ -83,7 +83,7 @@ p { margin: 0; }
 .site-header {
   position: sticky; top: 0; z-index: 50;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 16px var(--pad-x);
+  padding: 10px var(--pad-x);
   background: color-mix(in srgb, var(--bg) 80%, transparent);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -97,7 +97,7 @@ p { margin: 0; }
   line-height: 1;
 }
 .brand__logo {
-  height: 104px;
+  height: 64px;
   width: auto;
   display: block;
   filter: drop-shadow(0 0 14px color-mix(in srgb, var(--accent) 35%, transparent));
@@ -107,13 +107,14 @@ p { margin: 0; }
 .site-footer .brand__logo { height: 150px; }
 
 @media (max-width: 600px) {
-  .brand__logo { height: 72px; }
+  .brand__logo { height: 52px; }
 }
 
-.nav { display: flex; align-items: center; gap: 28px; }
+.nav { display: flex; align-items: center; gap: 24px; }
 .nav a {
   color: var(--text);
-  font-size: .95rem;
+  font-size: 0.95rem;
+  font-weight: 500;
   position: relative;
   padding: 6px 0;
   transition: color var(--t-fast);
@@ -122,12 +123,21 @@ p { margin: 0; }
 .nav a:not(.nav__cta)::after {
   content: ""; position: absolute; left: 0; bottom: 0;
   width: 0; height: 1px; background: var(--accent-text);
-  transition: width var(--t);
+  transition: width var(--t), box-shadow var(--t);
 }
 .nav a:not(.nav__cta):hover::after { width: 100%; }
+.nav a:not(.nav__cta).is-active {
+  color: var(--accent-text);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.nav a:not(.nav__cta).is-active::after {
+  width: 100%;
+  box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 70%, transparent);
+}
 .nav a.nav__cta {
   background: var(--accent); color: var(--accent-ink);
-  padding: 12px 22px; border-radius: 999px; font-weight: 600;
+  padding: 10px 20px; border-radius: 999px; font-weight: 700;
+  font-size: 0.95rem;
   line-height: 1; white-space: nowrap;
   transition: transform var(--t), box-shadow var(--t);
 }
@@ -167,46 +177,67 @@ p { margin: 0; }
 .btn--ghost { color: var(--text-strong); border-color: var(--border); }
 .btn--ghost:hover { border-color: var(--accent-text); color: var(--accent-text); transform: translateY(-2px); }
 
+.btn--hero {
+  padding: 20px 38px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  box-shadow: 0 16px 36px -12px color-mix(in srgb, var(--accent) 55%, transparent);
+  animation: heroBtnPop 2.6s ease-in-out infinite;
+}
+.btn--hero:hover { transform: translateY(-3px) scale(1.03); animation-play-state: paused; }
+@keyframes heroBtnPop {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.035); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn--hero { animation: none; }
+}
+
 /* -------- Hero -------------------------------------------- */
 .hero {
   position: relative;
-  padding: clamp(28px, 4vw, 56px) var(--pad-x) clamp(80px, 10vw, 140px);
+  min-height: auto;
+  display: flex;
+  align-items: center;
+  padding: clamp(32px, 5vw, 64px) var(--pad-x) clamp(24px, 4vw, 48px);
   overflow: hidden;
 }
 .hero__grid {
-  max-width: var(--container); margin: 0 auto;
+  width: 100%;
+  max-width: var(--container); margin: auto;
   display: grid; grid-template-columns: 1.15fr 0.85fr;
-  align-items: start; gap: 24px;
+  align-items: center; gap: 24px;
 }
 @media (max-width: 900px) {
   .hero__grid { grid-template-columns: 1fr; }
+  .hero { min-height: auto; padding-top: clamp(24px, 6vw, 48px); padding-bottom: clamp(48px, 10vw, 80px); }
 }
 .hero__inner { position: relative; z-index: 2; }
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.5rem, 6.5vw, 5.5rem);
-  line-height: 0.98;
-  letter-spacing: -0.04em;
-  margin: 18px 0 24px;
+  font-size: clamp(2.3rem, 5vw, 4.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin: 18px 0 22px;
   color: var(--text-strong);
 }
 .hero__sub {
   max-width: 56ch;
-  font-size: clamp(1rem, 1.4vw, 1.2rem);
+  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
   color: var(--text);
-  margin-bottom: 36px;
+  margin-bottom: 30px;
 }
-.hero__cta { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero__cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
 /* Hero statue */
 .hero__statue {
   position: relative;
   display: flex; align-items: center; justify-content: center;
-  min-height: 500px;
+  min-height: 340px;
 }
 @media (max-width: 900px) {
-  .hero__statue { min-height: 380px; order: -1; }
+  .hero__statue { min-height: 260px; order: -1; }
 }
 
 /* Hero decorative rings (the "double tap" ripple) — original
@@ -256,7 +287,7 @@ p { margin: 0; }
 }
 .statue-figure--lg { width: clamp(320px, 36vw, 560px); }
 .statue-figure--md { width: clamp(180px, 20vw, 280px); }
-.statue-figure--sm { width: clamp(110px, 12vw, 160px); }
+.statue-figure--sm { width: clamp(140px, 15vw, 200px); }
 
 .section__head--with-statue {
   display: flex; align-items: center; gap: 24px;
@@ -284,6 +315,8 @@ p { margin: 0; }
 
 /* -------- Sections ---------------------------------------- */
 .section {
+  position: relative;
+  overflow: hidden;
   padding: clamp(80px, 9vw, 140px) var(--pad-x);
   max-width: var(--container);
   margin: 0 auto;
@@ -304,6 +337,9 @@ p { margin: 0; }
   grid-template-columns: repeat(3, 1fr);
 }
 @media (max-width: 900px) { .services { grid-template-columns: 1fr; } }
+.services .service:nth-child(1) { transition-delay: 0ms; }
+.services .service:nth-child(2) { transition-delay: 140ms; }
+.services .service:nth-child(3) { transition-delay: 280ms; }
 
 .service {
   position: relative;
@@ -329,6 +365,15 @@ p { margin: 0; }
   border-color: color-mix(in srgb, var(--accent) 40%, var(--border));
 }
 .service:hover::before { opacity: 1; }
+.service__icon {
+  width: 52px; height: 52px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent-text);
+  margin-bottom: 2px;
+}
+.service__icon svg { width: 26px; height: 26px; }
 .service__num {
   font-family: var(--font-display);
   font-weight: 800;
@@ -348,7 +393,7 @@ p { margin: 0; }
 }
 
 /* Why us / About */
-.why { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+.why { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: end; }
 @media (max-width: 900px) { .why { grid-template-columns: 1fr; gap: 24px; } }
 .features { list-style: none; padding: 0; margin: 0; display: grid; gap: 14px; }
 .features li {
@@ -380,6 +425,15 @@ p { margin: 0; }
   transition: transform var(--t), border-color var(--t);
 }
 .process li:hover { transform: translateY(-3px); border-color: color-mix(in srgb, var(--accent) 40%, var(--border)); }
+.process__icon {
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  border-radius: 12px;
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent-text);
+  margin-bottom: 16px;
+}
+.process__icon svg { width: 22px; height: 22px; }
 .process .step {
   display: inline-block;
   font-family: var(--font-display); font-weight: 800;
@@ -590,4 +644,98 @@ p { margin: 0; }
 
 @media (prefers-reduced-motion: reduce) {
   .bg-mesh__glow { display: none; }
+}
+
+/* -------- Decorative scattered dots ------------------------- */
+.deco-dot {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  background: color-mix(in srgb, var(--accent) 70%, transparent);
+  filter: blur(1px);
+}
+.deco-dot--1 { width: 14px; height: 14px; top: 8%; right: 6%; opacity: 0.55; }
+.deco-dot--2 { width: 8px; height: 8px; top: 55%; left: 3%; opacity: 0.45; }
+.deco-dot--3 { width: 20px; height: 20px; bottom: 10%; right: 10%; opacity: 0.35; filter: blur(2px); }
+.deco-dot--4 { width: 10px; height: 10px; top: 12%; left: 8%; opacity: 0.5; }
+.deco-dot--5 { width: 16px; height: 16px; top: 15%; right: 8%; opacity: 0.4; }
+.deco-dot--6 { width: 9px; height: 9px; bottom: 18%; left: 12%; opacity: 0.5; }
+
+@media (max-width: 640px) {
+  .deco-dot { display: none; }
+}
+
+/* -------- Brand kit decorative elements ----------------------
+   Matches the original DoubleTap deck: a twisting bundle of
+   wavy lines (corner decoration), a sketchy hand-drawn arrow,
+   and the orange action-icon pill (like/comment/share/save).
+---------------------------------------------------------------*/
+
+/* ================= PREMIUM ABOUT WAVES ================= */
+
+.brand-lines{
+    position:absolute;
+    left:-380px;
+    top:50%;
+    transform:translateY(-50%);
+    width:1100px;
+    height:760px;
+    z-index:0;
+    pointer-events:none;
+    overflow:visible;
+}
+
+.brand-lines svg{
+    width:100%;
+    height:100%;
+    overflow:visible;
+}
+
+.brand-lines path{
+    animation:contour 18s ease-in-out infinite alternate;
+}
+
+.brand-lines path:nth-child(even){
+    animation-duration:24s;
+}
+
+.brand-lines path:nth-child(3n){
+    animation-duration:20s;
+}
+
+.brand-lines--hero-left{
+    display:none;
+}
+
+.brand-lines--about-left{
+    left:-420px;
+    top:48%;
+}
+
+.why,
+.features,
+.section__head{
+    position:relative;
+    z-index:2;
+}
+
+@keyframes contour{
+
+0%{
+transform:translateX(-20px) translateY(-6px);
+}
+
+100%{
+transform:translateX(20px) translateY(6px);
+}
+
+}
+
+@media(max-width:900px){
+
+.brand-lines{
+display:none;
+}
+
 }
