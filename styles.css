@@ -1,5 +1,5 @@
 /* ============================================================
-   DoubleTap — base styles
+   DoubleTap: base styles
    ============================================================ */
 
 /* -------- Theme (fixed orange palette) --------------------- */
@@ -178,16 +178,16 @@ p { margin: 0; }
 .btn--ghost:hover { border-color: var(--accent-text); color: var(--accent-text); transform: translateY(-2px); }
 
 .btn--hero {
-  padding: 20px 38px;
-  font-size: 1.15rem;
+  padding: 15px 26px;
+  font-size: 1rem;
   font-weight: 700;
   box-shadow: 0 16px 36px -12px color-mix(in srgb, var(--accent) 55%, transparent);
   animation: heroBtnPop 2.6s ease-in-out infinite;
 }
-.btn--hero:hover { transform: translateY(-3px) scale(1.03); animation-play-state: paused; }
+.btn--hero:hover { transform: translateY(-3px) scale(1.02); animation-play-state: paused; }
 @keyframes heroBtnPop {
   0%, 100% { transform: scale(1); }
-  50% { transform: scale(1.035); }
+  50% { transform: scale(1.02); }
 }
 @media (prefers-reduced-motion: reduce) {
   .btn--hero { animation: none; }
@@ -198,7 +198,7 @@ p { margin: 0; }
   position: relative;
   display: flex;
   align-items: center;
-  padding: clamp(20px, 3vw, 40px) var(--pad-x) clamp(32px, 5vw, 56px);
+  padding: clamp(14px, 2vw, 28px) var(--pad-x) clamp(20px, 3vw, 36px);
   overflow: hidden;
 }
 .hero__grid {
@@ -215,17 +215,17 @@ p { margin: 0; }
 
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.3rem, 5vw, 4.4rem);
-  line-height: 1.05;
+  font-size: clamp(2rem, 4.2vw, 3.6rem);
+  line-height: 1.08;
   letter-spacing: -0.03em;
-  margin: 18px 0 22px;
+  margin: 14px 0 16px;
   color: var(--text-strong);
 }
 .hero__sub {
   max-width: 56ch;
-  font-size: clamp(1.05rem, 1.3vw, 1.25rem);
+  font-size: clamp(1rem, 1.2vw, 1.15rem);
   color: var(--text);
-  margin-bottom: 30px;
+  margin-bottom: 22px;
 }
 .hero__cta { display: flex; gap: 16px; flex-wrap: wrap; }
 
@@ -238,7 +238,7 @@ p { margin: 0; }
   .hero__statue { order: -1; }
 }
 
-/* Hero decorative rings (the "double tap" ripple) — original
+/* Hero decorative rings (the "double tap" ripple): original
    floating position, independent of the statue image. */
 .hero__decor { position: absolute; inset: 0; pointer-events: none; z-index: 1; }
 .ring {
@@ -283,7 +283,7 @@ p { margin: 0; }
   -webkit-mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 98%);
           mask-image: linear-gradient(to bottom, black 0%, black 78%, transparent 98%);
 }
-.statue-figure--lg { width: clamp(320px, 36vw, 560px); }
+.statue-figure--lg { width: clamp(260px, 30vw, 460px); }
 .statue-figure--md { width: clamp(140px, 15vw, 210px); }
 .statue-figure--sm { width: clamp(140px, 15vw, 200px); }
 
@@ -298,7 +298,7 @@ p { margin: 0; }
   .section__head--with-statue { flex-direction: column; align-items: flex-start; }
 }
 
-.about__statue { margin-bottom: 28px; width: clamp(170px, 18vw, 250px); }
+.about__statue { margin-bottom: 28px; width: clamp(230px, 26vw, 340px); }
 .cta__statue { margin: 0 auto 20px; }
 
 /* "Double-tap" cadence: two quick pulses, then a longer rest. */
@@ -315,7 +315,7 @@ p { margin: 0; }
 .section {
   position: relative;
   overflow: hidden;
-  padding: clamp(24px, 3.2vw, 44px) var(--pad-x);
+  padding: clamp(12px, 1.8vw, 24px) var(--pad-x);
   max-width: var(--container);
   margin: 0 auto;
 }
@@ -386,13 +386,15 @@ p { margin: 0; }
   position: relative; padding-left: 18px; font-size: .95rem; color: var(--text);
 }
 .service__bullets li::before {
-  content: ""; position: absolute; left: 0; top: 12px;
-  width: 8px; height: 1px; background: var(--accent-text);
+  content: ""; position: absolute; left: 0; top: 10px;
+  width: 6px; height: 6px; border-radius: 50%; background: var(--accent-text);
 }
 
 /* Why us / About */
 .why { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
 @media (max-width: 900px) { .why { grid-template-columns: 1fr; gap: 24px; } }
+.why header p.eyebrow { margin-bottom: 8px; }
+.why header h2 { margin-bottom: 16px; }
 .features { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; }
 .features li {
   display: grid; gap: 4px;

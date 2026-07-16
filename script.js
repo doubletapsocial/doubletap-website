@@ -1,4 +1,4 @@
-// DoubleTap — site interactions
+// DoubleTap: site interactions
 
 // ---- Mesh background cursor-following glow ----
 (function () {
