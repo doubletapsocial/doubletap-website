@@ -49,7 +49,6 @@
     <section class="hero">
       <div class="hero__grid">
         <div class="hero__inner">
-          <p></p>
           <h1 class="hero__title">
             We don't just create.<br/>
             <span class="text-accent">We make brands impossible to ignore.</span>
@@ -138,7 +137,7 @@
           <h3>Meta Ads</h3>
           <p>We pair strategic creative hooks with data backed architecture to acquire customers profitably.</p>
           <ul class="service__bullets">
-            <li>Full funnel paid strategy</li>
+            <li>Full-funnel paid strategy</li>
             <li>Creative production &amp; testing</li>
             <li>Tracking &amp; attribution</li>
             <li>Weekly performance reviews</li>
@@ -217,6 +216,15 @@
           <span class="step">04</span><h3>Quantify</h3><p>We wire that attention into an engine to print revenue.</p>
         </li>
       </ol>
+
+      <div class="process__flow reveal">
+        <span class="process__flow-label">The Setup</span>
+        <svg class="process__flow-arrow" viewBox="0 0 400 20" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+          <line x1="0" y1="10" x2="378" y2="10" stroke="currentColor" stroke-width="2" stroke-dasharray="7 7" stroke-linecap="round"/>
+          <path d="M368 2 L387 10 L368 18" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="process__flow-label">The Knockout</span>
+      </div>
     </section>
 
     <!-- CTA -->
@@ -230,7 +238,7 @@
         <p class="eyebrow">Let's talk</p>
         <h2>Let's<br/>Double Tap.</h2>
         <p class="section__lede">Tell us what you're building. We'll come back within one business day with a point of view and a next step.</p>
-        <form class="contact-form" id="mainContactForm" novalidate action="https://formspree.io/f/xykqqdkg" method="POST">
+        <form class="contact-form" id="mainContactForm" action="https://formspree.io/f/xykqqdkg" method="POST">
           <label>
             <span>Your name</span>
             <input type="text" name="name" required placeholder="Jane Doe" />
@@ -316,7 +324,7 @@
         </label>
         <label>
           <span>Phone</span>
-          <input type="tel" name="phone" required placeholder="+91 00000 00000" />
+          <input type="tel" name="phone" required pattern="[0-9]{10}" maxlength="10" inputmode="numeric" title="Please enter a 10-digit phone number" placeholder="10-digit number" />
         </label>
         <button type="submit" class="btn btn--primary">Send it over <span aria-hidden="true">→</span></button>
       </form>
